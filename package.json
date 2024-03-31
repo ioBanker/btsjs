@@ -1,10 +1,10 @@
 {
-  "name": "btsdex",
-  "version": "0.7.9",
-  "description": "Package for work with BitShares DEX",
+  "name": "btsjs",
+  "version": "0.8.0",
+  "description": "Package for work with BitShares Blockchain",
   "main": "lib",
   "bin": {
-    "btsdex": "./cli.js"
+    "btsjs": "./cli.js"
   },
   "scripts": {
     "dev": "nodemon --exec yarn build --watch src",
@@ -12,8 +12,8 @@
     "build": "babel src -d lib",
     "postbuild": "yarn browserify",
     "prebrowserify": "rm -rf build",
-    "browserify": "browserify lib/index.js --standalone BitShares -o build/btsdex.js -d",
-    "postbrowserify": "minify build/btsdex.js -o build/btsdex.min.js",
+    "browserify": "browserify lib/index.js --standalone BitShares -o build/btsjs.js -d",
+    "postbrowserify": "minify build/btsjs.js -o build/btsjs.min.js",
     "test": "mocha --timeout 10000",
     "style": "prettier --check src",
     "style-all": "prettier --check src packages/api/src packages/ecc/src packages/serializer/src"
@@ -21,7 +21,7 @@
   "keywords": [
     "bitshares"
   ],
-  "author": "scientistnik",
+  "author": "ioBanker",
   "license": "MIT",
   "prettier": {
     "arrowParens": "avoid"
@@ -31,9 +31,9 @@
     "assert": "^1.5.0",
     "bigi": "^1.4.2",
     "bignumber.js": "^7.2.1",
-    "btsdex-api": "^0.7.2",
-    "btsdex-ecc": "^0.7.0",
-    "btsdex-serializer": "^0.7.7",
+    "btsjs-api": "^0.7.2",
+    "btsjs-ecc": "^0.7.0",
+    "btsjs-serializer": "^0.7.7",
     "bytebuffer": "^5.0.1",
     "lzma": "^2.3.2",
     "safe-buffer": "^5.2.0"
