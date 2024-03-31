@@ -1,6 +1,6 @@
-# btsdex
+# btsjs
 
-Package for work with BitShares DEX.
+Package for work with BitShares Blockchain.
 The main class in the package is `BitShares`. All you need is in it. There are a couple more helper classes, but they are not really designed for use outside of the `BitShares` class.
 
 The `BitShares` class consists of static methods intended for working with the BitShares public blockchain API. Using the BitShares class, you can create an object whose methods provide access to the private part of the BitShares blockchain API.
@@ -10,25 +10,25 @@ The `BitShares` class consists of static methods intended for working with the B
 ### If you use `npm`
 This library can be obtained through npm:
 ```
-$ npm install btsdex
+$ npm install btsjs
 ```
 If you want use [REPL-mode](#repl-mode):
 ```
-$ npm install -g btsdex
+$ npm install -g btsjs
 ```
 
 ### If you use `browser`
-Include [this](https://github.com/scientistnik/btsdex/releases) in html-file:
+Include [this](https://github.com/scientistnik/btsjs/releases) in html-file:
 ```
-<script src="btsdex.min.js"></script>
+<script src="btsjs.min.js"></script>
 ```
 After that in console available `BitShares` class.
 
 ## Usage
 
-__btsdex__ package contain class `BitShares`: 
+__btsjs__ package contain class `BitShares`: 
 ```js
-const BitShares = require('btsdex')
+const BitShares = require('btsjs')
 ```
 To connect to the BitShares network, you must call `connect` method:
 ```js
@@ -117,7 +117,7 @@ await acc.assetReserve("ABC", 12)
 If you want to send tokens with memo and get `acc` from `constructor` (use `new BitShares()`), then before that you need to set a private memo-key:
 ```js
 bot.setMemoKey(<privateMemoKey>)
-await bot.transfer("scientistnik", "HONEST.USD", 10, "Thank you for BTSDEX!")
+await bot.transfer("scientistnik", "HONEST.USD", 10, "Thank you for btsjs!")
 ```
 ### Transaction Builder
 
@@ -165,7 +165,7 @@ The account property has a lot more operations available than an instance of the
 
 An example of using transaction builder for executing 'account_create' operation:
 ```js
-let BitShares = require("btsdex")
+let BitShares = require("btsjs")
 
 BitShares.subscribe("connected", start)
 
@@ -212,14 +212,14 @@ Very often we have to expect, when there will be some action in the blockchain, 
 
 #### Event types
 
-At the moment, __BTSDEX__ has three types of events:
+At the moment, __btsjs__ has three types of events:
 * `connected` - works once after connecting to the blockchain;
 * `block` - it works when a new block is created in the blockchain;
 * `account` - occurs when the specified account is changed (balance change).
 
 For example:
 ```js
-const BitShares = require("btsdex");
+const BitShares = require("btsjs");
 
 BitShares.subscribe('connected', startAfterConnected);
 BitShares.subscribe('block', callEachBlock);
@@ -244,7 +244,7 @@ Another feature of the event is that when you first subscription call the method
 Now it's not necessary to explicitly call `BitShares.connect()`, it's enough to subscribe to the `connected` event.
 
 ```js
-const BitShares = require("btsdex");
+const BitShares = require("btsjs");
 
 BitShares.subscribe('connected', start);
 
@@ -258,7 +258,7 @@ async function start() {
 The `block` event is triggered when a new block is created in the blockchain. The first event subscription automatically creates a subscription to the `connected` event, and if this is the first subscription, it will cause a connection to the blockchain.
 
 ```js
-const BitShares = require("btsdex");
+const BitShares = require("btsjs");
 
 BitShares.subscribe('block', newBlock);
 
@@ -282,7 +282,7 @@ The first subscriber to `account` will call a `block` subscription, which in the
 
 Example code:
 ```js
-const BitShares = require("btsdex");
+const BitShares = require("btsjs");
 
 BitShares.subscribe('account', changeAccount, 'scientistnik');
 
@@ -294,19 +294,19 @@ In all the signed functions, an array of account history objects is transferred,
 
 ### REPL-mode
 
-If you install `btsdex`-package in global storage, you may start `btsdex` exec script:
+If you install `btsjs`-package in global storage, you may start `btsjs` exec script:
 ```js
-$ btsdex
+$ btsjs
 >|
 ```
 This command try autoconnect to mainnet BitShares. If you want to connect on testnet, try this:
 ```js
-$ btsdex --testnet
+$ btsjs --testnet
 >|
 ```
 or use `--node` key:
 ```js
-$ btsdex --node wss://dex.iobanker.com/ws
+$ btsjs --node wss://dex.iobanker.com/ws
 >|
 ```
 
@@ -324,7 +324,7 @@ It is nodejs REPL with several variables:
 #### For example
 
 ```js
-$ btsdex
+$ btsjs
 > assets["bts"].then(console.log)
 ```
 
@@ -332,7 +332,7 @@ $ btsdex
 
 If need call only one request, you may use `--account`, `--asset`, `--block`, `--object`, `--history` or `--transfer` keys in command-line:
 ```js
-$ btsdex --account <'name' or 'id' or 'last number in id'>
+$ btsjs --account <'name' or 'id' or 'last number in id'>
 {
   "id": "1.2.5992",
   "membership_expiration_date": "1970-01-01T00:00:00",
@@ -340,14 +340,14 @@ $ btsdex --account <'name' or 'id' or 'last number in id'>
   "referrer": "1.2.21",
   ...
 }
-$ btsdex --asset <'symbol' or 'id' or 'last number in id'>
+$ btsjs --asset <'symbol' or 'id' or 'last number in id'>
 {
   "id": "1.3.0",
   "symbol": "BTS",
   "precision": 5,
   ...
 }
-$ btsdex --block [<number>]
+$ btsjs --block [<number>]
 block_num: 4636380
 {
   "previous": "0046bedba1317d146dd6afbccff94412d76bf094",
@@ -355,7 +355,7 @@ block_num: 4636380
   "witness": "1.6.41",
   ...
 }
-$ btsdex --object 1.2.3
+$ btsjs --object 1.2.3
 {
   "id": "1.2.3",
   "membership_expiration_date": "1969-12-31T23:59:59",
@@ -363,7 +363,7 @@ $ btsdex --object 1.2.3
   "referrer": "1.2.3",
   ...
 }
-$ btsdex --history <account> [<limit>] [<start>] [<stop>]
+$ btsjs --history <account> [<limit>] [<start>] [<stop>]
 [
   {
     "id": "1.11.98179",
@@ -371,7 +371,7 @@ $ btsdex --history <account> [<limit>] [<start>] [<stop>]
       0,
   ...
 }]
-$ btsdex --transfer <from> <to> <amount> <asset> [--key]
+$ btsjs --transfer <from> <to> <amount> <asset> [--key]
 Transfered <amount> <asset> from '<from>' to '<to>' with memo '<memo>'
 ```
 
@@ -388,10 +388,10 @@ let tradebot = await BitShares.accounts["trade-bot"];
 The returned objects contain all the fields that blockchain returns when the given asset or account name is requested.
 
 ### Some examples
-The below example can be used to broadcast any transaction to the BitShares Blockchain using API node hence you can use any BitShares Public API node, you will just need to replace parameters under **params** and the operation name **asset_update** in below example with your desired transaction parameters and its operation name. Use the below links to determine your desired operation name and needed parameters along with their required order. Below transaction example serialization can be found here [Serialization](https://github.com/bitshares/btsdex/blob/master/packages/serializer/src/operations.js) as you will need to honor the order of [Operation](https://github.com/bitshares/bitshares-core/blob/master/libraries/protocol/include/graphene/protocol/operations.hpp) parameters along with their sub parameters which are present in below example **new_options** note that some of parameters or sub parameters are optional:
+The below example can be used to broadcast any transaction to the BitShares Blockchain using API node hence you can use any BitShares Public API node, you will just need to replace parameters under **params** and the operation name **asset_update** in below example with your desired transaction parameters and its operation name. Use the below links to determine your desired operation name and needed parameters along with their required order. Below transaction example serialization can be found here [Serialization](https://github.com/bitshares/btsjs/blob/master/packages/serializer/src/operations.js) as you will need to honor the order of [Operation](https://github.com/bitshares/bitshares-core/blob/master/libraries/protocol/include/graphene/protocol/operations.hpp) parameters along with their sub parameters which are present in below example **new_options** note that some of parameters or sub parameters are optional:
 
 ```js
-const BitShares = require("btsdex");
+const BitShares = require("btsjs");
 BitShares.connect("wss://dex.iobanker.com/ws"); # replace wss://dex.iobanker.com/ws with API node if you want to use another BitShares API node
 BitShares.subscribe('connected', startAfterConnected);
 
@@ -436,7 +436,7 @@ console.log(tx);
 Another example for getting account orders information: 
 
 ```js
-const BitShares = require('btsdex')
+const BitShares = require('btsjs')
 KEY = 'privateActiveKey'
 
 BitShares.subscribe('connected', startAfterConnected)
@@ -454,11 +454,11 @@ async function startAfterConnected() {
 ```
 
 ## Documentation
-For more information, look [wiki](https://scientistnik.github.io/btsdex) or in `docs`-folder.
+For more information, look [wiki](https://scientistnik.github.io/btsjs) or in `docs`-folder.
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub. For communication, you can use the Telegram-channel [btdex](https://t.me/btsdex).
+Bug reports and pull requests are welcome on GitHub. For communication, you can use the Telegram-channel [btdex](https://t.me/btsjs).
 
 `master`-branch use for new release. For new feature use `dev` branch. All pull requests are accepted in `dev` branch.
 
